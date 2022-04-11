@@ -40,7 +40,7 @@ public class FixedDepositAccountMovementServiceImpl implements FixedDepositAccou
     }
 
     @Override
-    public Flux<FixedDepositAccountMovement> findByidCreditCard(String id) {
-        return repository.findByidCreditCard(id);
+    public Flux<FixedDepositAccountMovement> findByAccountNumber(String num) {
+        return repository.findByidCreditCard(num);
     }
 }
