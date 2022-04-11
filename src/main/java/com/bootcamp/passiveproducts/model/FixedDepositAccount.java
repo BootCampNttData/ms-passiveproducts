@@ -11,6 +11,7 @@ public class FixedDepositAccount {
     private String id;
     private String accountNumber;
     private String depositDate;
+    private String withdrawalDate;
     private String percent;
     private String months;
     private String clientId;

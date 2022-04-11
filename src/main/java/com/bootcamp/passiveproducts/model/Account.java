@@ -8,10 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Account {
     @Id
-    protected String id;
-    protected String accountNumber;
-    protected String accountType;
-    protected String clientType;
-    protected String creationDate;
-    protected String clientId;
+    public String id;
+    public String accountNumber;
+    public String accountType;
+    public String feeAmount;
+    public String movementLimit;
+    public String clientType;
+    public String creationDate;
+    public String clientId;
 }
