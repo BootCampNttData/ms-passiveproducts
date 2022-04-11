@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/account")
 @RequiredArgsConstructor
@@ -22,9 +24,39 @@ public class AccountController {
         return service.findByAccountNumber(num);
     }
 
+    /**
+     * Crea una nueva cuenta Ahorro o Corriente dependiendo del pararameto ingresado en AccountType [C|A]
+     * Tambien valida si el cliente es una Empresa [E] o persona natural [P]
+     * En caso que no se cumplan las condiciones retornara un objeto vacio.
+     * @param account
+     * @return
+     */
     @PostMapping
     public Mono<Account> create(@RequestBody Account account){
-        return service.create(account);
+        String accountType=account.getAccountType();
+        String clientType = account.getClientType();
+        if("P".equals(clientType)){
+            List<Account> accountsList= service.findByClientId(account.getClientId()).collectList().block();
+            boolean haveSvAcc=false;
+            boolean haveCuAcc=false;
+            for(Account a:accountsList){
+                if(a.getAccountType().equals("C"))
+                    haveCuAcc = true;
+                if (a.getAccountType().equals("A"))
+                    haveSvAcc = true;
+            }
+            if(account.getAccountType().equals("A") && !haveSvAcc){
+                return service.create(account);
+            }
+            if(account.getAccountType().equals("C") && !haveCuAcc){
+                return service.create(account);
+            }
+        }else {
+            if ("C".equals(accountType)) {
+                return service.create(account);
+            }
+        }
+        return Mono.just(new Account());
     }
 
     @PostMapping("/update")
@@ -41,5 +73,10 @@ public class AccountController {
     public Mono<Account> deleteById(@RequestBody String id){
         return service.deleteById(id);
     }
+
+    /** *****************************************/
+
+
+
 
 }

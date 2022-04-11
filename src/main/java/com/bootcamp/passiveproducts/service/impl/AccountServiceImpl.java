@@ -17,6 +17,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Mono<Account> create(Account account) {
         return repository.save(account);
+
     }
 
     @Override
@@ -42,5 +43,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Flux<Account> findByAccountNumber(String num) {
         return repository.findByAccountNumber(num);
+    }
+
+    @Override
+    public Flux<Account> findByClientId(String num) {
+        return repository.findByClientId(num);
     }
 }

@@ -10,10 +10,10 @@ public class Account {
     @Id
     public String id;
     public String accountNumber;
-    public String accountType;
+    public String accountType;  /** [C] Corriente - [A] Ahorro*/
     public String feeAmount;
     public String movementLimit;
-    public String clientType;
+    public String clientType;   /** [P] Personal - [E] Empresarial */
     public String creationDate;
     public String clientId;
 }
