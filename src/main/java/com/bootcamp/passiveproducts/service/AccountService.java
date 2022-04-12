@@ -8,7 +8,8 @@ public interface AccountService {
     Flux<Account> findAll();
     Mono<Account> create(Account account);
     Flux<Account> findByAccountNumber(String num);
-    Flux<Account> findByClientId(String clientId);
+//    Mono<Account> findByClientIdAndAccountType(String num,String type);
+    Flux<Account> findByClientId(String id);
     Mono<Account> update(Account account);
     Mono<Account> deleteById(String id);
     Mono delete(Account account);

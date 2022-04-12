@@ -4,7 +4,9 @@ import com.bootcamp.passiveproducts.model.Account;
 import com.bootcamp.passiveproducts.repository.AccountRepository;
 import com.bootcamp.passiveproducts.service.AccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -46,7 +48,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Flux<Account> findByClientId(String num) {
-        return repository.findByClientId(num);
+    public Flux<Account> findByClientId(String id) {
+        return repository.findByClientId( id);
     }
+//    @Override
+//    public Mono<Account> findByClientIdAndAccountType(String num,String type) {
+//
+//        return repository.findByClientIdAndAccountType( num, type);
+//    }
 }
