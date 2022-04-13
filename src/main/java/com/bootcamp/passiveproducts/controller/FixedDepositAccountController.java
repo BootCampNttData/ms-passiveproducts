@@ -18,10 +18,15 @@ public class FixedDepositAccountController {
     }
 
     @GetMapping("/find/{num}")
-    public Flux<FixedDepositAccount> getByIdCredit(@PathVariable("num") String num){
+    public Flux<FixedDepositAccount> findByAccountNumber(@PathVariable("num") String num){
         return service.findByAccountNumber(num);
     }
 
+    /** Deposito a Cuenta Plazo Fijo
+     *
+     * @param fixedDepositAccount
+     * @return
+     */
     @PostMapping
     public Mono<FixedDepositAccount> create(@RequestBody FixedDepositAccount fixedDepositAccount){
         return service.create(fixedDepositAccount);

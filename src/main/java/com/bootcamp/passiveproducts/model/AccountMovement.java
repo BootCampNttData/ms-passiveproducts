@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class AccountMovement {
     @Id
     private String id;
-    private String idCreditCad;
+    private String accountNumber;
     private String movementType;
     private String movementDate;
     private String amount;

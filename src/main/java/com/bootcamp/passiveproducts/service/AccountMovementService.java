@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 public interface AccountMovementService {
     Flux<AccountMovement> findAll();
     Mono<AccountMovement> create(AccountMovement accountMovement);
-    Flux<AccountMovement> findByidCreditCad(String id);
+    Flux<AccountMovement> findByAccountNumber(String num);
     Mono<AccountMovement> update(AccountMovement accountMovement);
     Mono<AccountMovement> deleteById(String id);
     Mono delete(AccountMovement accountMovement);

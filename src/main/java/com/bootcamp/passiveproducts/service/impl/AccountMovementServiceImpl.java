@@ -14,6 +14,11 @@ import reactor.core.publisher.Mono;
 public class AccountMovementServiceImpl implements AccountMovementService {
     public final AccountMovementRepository repository;
 
+    /**
+     * Movimiento Retiro o deposito a cuenta corriente o Ahorro
+     * @param accountMovement
+     * @return
+     */
     @Override
     public Mono<AccountMovement> create(AccountMovement accountMovement) {
         return repository.save(accountMovement);
@@ -40,7 +45,8 @@ public class AccountMovementServiceImpl implements AccountMovementService {
     }
 
     @Override
-    public Flux<AccountMovement> findByidCreditCad(String id) {
-        return repository.findByidCreditCad(id);
+    public Flux<AccountMovement> findByAccountNumber(String mun) {
+        return repository.findByAccountNumber(mun);
     }
+
 }

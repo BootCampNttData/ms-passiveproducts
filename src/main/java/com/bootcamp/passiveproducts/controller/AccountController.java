@@ -5,6 +5,7 @@ import com.bootcamp.passiveproducts.service.AccountService;
 import com.sun.jdi.connect.Connector;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/account")
 @RequiredArgsConstructor
 public class AccountController {
+    @Value("${passiveproducts.server.url}")
+    private String passPrdUrl;
+
     public final AccountService service;
     @GetMapping
     public Flux<Account> getAll(){
@@ -48,7 +52,7 @@ public class AccountController {
             boolean haveSavingAcc=false;
             boolean haveCurrentAcc=false;
 
-            String url = "http://localhost:8084/account/findByClientId/" + account.getClientId();
+            String url = passPrdUrl +"/account/findByClientId/" + account.getClientId();
             ResponseEntity<Account[]> accounts = restTemplate.getForEntity(url,Account[].class);
 
             for(Account a: accounts.getBody()){
@@ -56,7 +60,7 @@ public class AccountController {
                 if(a.getAccountType().equals("C")){ haveCurrentAcc=true; }
             }
 
-            if(account.getAccountType().equals("A") && !haveSavingAcc){ mono =  service.create(account); }
+            if(account.getAccountType().equals("A") && !haveSavingAcc) { mono =  service.create(account); }
             if(account.getAccountType().equals("C") && !haveCurrentAcc){ mono =  service.create(account); }
 
         }else{                                                                          /** Si es cuenta Corporativa */
