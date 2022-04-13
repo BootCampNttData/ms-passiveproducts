@@ -1,6 +1,5 @@
 package com.bootcamp.passiveproducts.controller;
 
-import com.bootcamp.passiveproducts.model.Account;
 import com.bootcamp.passiveproducts.model.FixedDepositAccount;
 import com.bootcamp.passiveproducts.model.FixedDepositAccountMovement;
 import com.bootcamp.passiveproducts.service.FixedDepositAccountMovementService;
@@ -65,6 +64,7 @@ public class FixedDepositAccountMovementController {
         if(mvType.equals("D")){
             return service.create(fixedDepositAccountMovement);    
         }else{
+            /** Se valida la fecha de retiro */
             if(allowWithdrar && Double.parseDouble(fixedDepositAccountMovement.getAmount())<=Double.parseDouble(balance.getBody())){
                 return service.create(fixedDepositAccountMovement);
             }
